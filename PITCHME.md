@@ -1,12 +1,50 @@
+@title[Введение]
+---
+@title[Область применения]
+---
+@title[Интерфейс ридера]
+<!-- пример на binary для тестов производительности -->
+---
+@title[Чтение вручную]
+<!-- + asm дамп -->
+---
+@title[Сравнение binary и чтения вручную]
+<!-- аллокация памяти во время чтения -->
+---
+@title[Особенности дизайна binary-подобных ридеров]
+<!-- Библиотеки cereal, binary, protocol-buffers -->
+<!-- lazy Bytestring -->
+<!-- Codensity http://comonad.com/reader/2012/unnatural-transformations-and-quantifiers/ -->
+---
+@title[Особенности дизайна store]
+<!-- замер производительности store -->
+---
+@title[Дамп кода store]
+---
+@title[Дизайн lev-tolstoy]
+<!-- назад к сodensity -->
+<!-- статическая часть -->
+<!-- indexed monad для вычисления смешений -->
+---
+@title[Дамп кода lev-tolstoy]
+<!-- rebindable syntax -->
+<!-- дамп кода статической части -->
+---
+@title[Сравнение производительности lev-tolstoy и store]
+
+
+
+<!-- 
+
 ---?color=linear-gradient(to right, #c02425, #f0cb35)
 @title[Introduction]
 
-<!--
+<! --
 Tip! Get started with this template as follows:
 Step 1. Delete the contents of this PITCHME.md file.
 Step 2. Start adding your own custom slide content.
 Step 3. Copy slide markdown snippets from template/md directory as needed.
--->
+-- >
 
 @snap[west text-25 text-bold text-white]
 GitPitch<br>*The Template*
@@ -69,3 +107,4 @@ For the best viewing experience, press F for fullscreen.
 @snap[south docslink text-gold span-100]
 For supporting documentation see the [The Template Docs](https://gitpitch.com/docs/the-template)
 @snapend
+-->
