@@ -1,5 +1,13 @@
-# GitPitch In-60-Seconds - A Very Short Tutorial.
 #
+# The Template Settings
+#
+# The default settings below are optimized for this template.
+# Override settings with your own custom values as needed.
+#
+# For further details, see https://gitpitch.com/docs/settings.
+#
+
+published : true
 
 #
 # Theme Setting
@@ -11,20 +19,14 @@ theme : simple
 # Theme-Override Setting
 # Doc: https://gitpitch.com/docs/settings/custom-theme
 #
-theme-override: assets/css/PITCHME.css
+theme-override : template/css/PITCHME.css
 
 #
 # Logo Setting
 # https://gitpitch.com/docs/settings/logo
 #
-logo : assets/img/logo.png
-logo-postion : top-left
-
-#
-# Layout Setting
-# Doc: https://gitpitch.com/docs/settings/layout
-#
-layout : center
+logo : template/img/logo.png
+logo-position : top-left
 
 #
 # Footnote Setting
@@ -33,15 +35,29 @@ layout : center
 footnote : "GitPitch - The Fastest Way From Idea To Presentation"
 
 #
-# Published Setting
-# Doc: https://gitpitch.com/docs/settings/published
+# Highlight (Code) Setting
+# Doc: https://gitpitch.com/docs/settings/highlight
 #
-published : true
+highlight : atom-one-dark
 
 #
-# Twitter Card Settings [Pro Only]
+# Layout Setting
+# Doc: https://gitpitch.com/docs/settings/layout
+#
+layout : center
+
+#
+# Transition Setting
+# This template uses GitPitch Snap-Layouts extensively. For this
+# reason THIS VALUE SHOULD NOT BE MODIFIED. See:
+# https://gitpitch.com/docs/layout-features/snap-layout-slide-transitions
+#
+transition : none
+
+#
+# Twitter Card Settings
 # Doc: https://gitpitch.com/docs/settings/twitter-card
 #
-title : "GitPitch In 60 Seconds"
-description : "A short tutorial introducing the power and simplicity of GitPitch, the markdown presentation service on Git."
-thumbnail : https://gitpitch.com/gpimg/tutorial-thumb.png
+title : "GitPitch - The Quickstart Template"
+description : "High-utility markdown slide templates for GitPitch presentation authors."
+thumbnail : https://gitpitch.com/gpimg/the-template-thumb.jpg
