@@ -12,6 +12,9 @@ data Decoder a = Fail !B.ByteString String
               | Done !B.ByteString a
               | BytesRead {-# UNPACK #-} !Int64 (Int64 -> Decoder a)
 
+bindG :: Get a -> (a -> Get b) -> Get b
+bindG (C c) f = C $ \i ks -> c i (\i' a -> (runCont (f a)) i' ks)
+
 runGet :: Get a -> L.ByteString -> a
 runGet g lbs0 = feedAll (runGetIncremental g) lbs0
   where

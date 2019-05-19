@@ -170,8 +170,15 @@ Note:
 @[6-8] 
 @[10-13] 
 @[21-25]
-@[15, 17-18, 20, 27, 29]
+@[15,17-18,20,27,29]
 @[0-29]
+
+Note:
+- AT&T syntax
+- Берём адрес, прибавляем смещение
+- Читаем все значения в регистры
+- По мере чтения регистры сливаются на стек
+- Создание и заполнение возвращаемых структур
 
 ---
 
@@ -195,25 +202,140 @@ criterion
 
 @code[txt text-07](assets/src/read12Int64HB.txt)
 @[1-2,13-14]
-@[1, 9-10, 13, 21-22]
+@[1,9-10,13,21-22]
 @[1-25]
+
+Note:
+- Разница в производительности
+- Наличие GC в binary
 
 ---
 
 @title[Дизайн binary]
-binary
-@[1, 3-6]
-@[8]
-@[10-13]
-@[15-21]
-@[1-21]
 
-@code[haskell text-08](assets/src/binary/get.hs)
+binary
+
+@code[haskell text-07](assets/src/binary/get.hs)
+@[1,3-6,8,10-13]
+@[15-16]
+@[18-24]
+@[1-24]
+
+Note:
+- Струкруты данных - функция чтения через передачу контекста и продолжения
+- Монадический биндинг (собираем продолжение)
+- Драйвер (запуск функции и паттерн-матчинг по результату)
 
 ---
 
+@title[Простая функция]
+
+@code[haskell text-07](assets/src/simplefn/Main.hs)
+
+Note: 
+- Разбор простой функции
+- Используем noinline
+
+--- 
+
+@title[Простая функция cmm]
+
+@snap[north]
+-ddump-cmm
+@snapend
+
+@snap[midpoint]
+@code[c text-07](assets/src/simplefn/Main.cmm)
+@[9-11]
+@[12-16]
+@[17-18]
+@[19-23]
+@[24-27]
+@[1-29]
+@snapend
+
 Note:
-When ghc compiles your program, after lexical analysis and syntax analysis it first removes syntactical sugar and does scope analysis; then, after type checking, it translates your code to core, as we saw. The core gets optimized and then translated to stg (for “Spineless Tagless G-machine”); stg code is very similar to core, but with a handful of additional restrictions; most importantly, all constructor applications must be fully applied (and if not, an explicit lambda must be constructed). Finally, the stg code gets translated to C--, which is a portable assembly language similar in intent to llvm, and the C-- code then is translated to assembly language.
+- Проверяем, достаточно ли места в куче, чтобы вернуть объект
+- Если недостаточно, будет вызван GC (stg_gc_fun)
+- Проверка логического условия
+- Если выполнено, записываем в кучу info pointer Done и значение аргумента, в R1 сохраняем указатель на объект в куче.
+- Если не верно, уменьшаем Hp, т.к. кучу использовать не будем, в R1 указатель на info pointer Fail.
+- Если бы мы использовали стек, была бы дополнительная проверка наличия места на стеке, аналогичная проверки HpLim
+- И это еще strictness analysis сработал!
+
+---
+
+@title[Простая функция asm]
+
+@snap[north]
+-ddump-asm
+@snapend
+
+@snap[midpoint]
+@code[x86asm text-07](assets/src/simplefn/Main.asm)
+@[2-5]
+@[18-21]
+@[6-8]
+@[13-17]
+@[9-12]
+@[1-21]
+@snapend
+
+Note: 
+- Проверка достаточно ли места в куче
+- Вызов мусоросборника (аргументы пишутся в память таблицы r13, вызовы через jmp используя таблицу r13, адрес возврата в ebx)
+- Сравнение
+- Если не равны, пишем в кучу info pointer Done и аргумент, в ebx - ссылку
+- Если равны, уменьшаем Hp, в ebx - info pointer Fail
+- Все вызовы через jmp, адрес продолжения в регистре rbp кроме мусоросборника
+- Метки в asm и в cmm совпадают
+
+---
+
+@title[Простая функция inline]
+
+
+@code[haskell text-07](assets/src/simplefn/Main-inline.hs)
+
+Note: 
+- Убираем директиву {-# NOINLINE #-}
+
+---
+
+@title[Простая функция inline cmm]
+
+@snap[north]
+-ddump-cmm
+@snapend
+
+@snap[midpoint]
+@code[c text-07](assets/src/simplefn/Main-Inline.cmm)
+@snapend
+
+Note: 
+- Функции ask нет, вся ненужная логика убрана
+- main1_closure - код для построения строки "
+
+---
+
+@title[Простая функция inline asm]
+
+@snap[north]
+-ddump-asm
+@snapend
+
+@snap[midpoint span-80]
+@code[x86asm text-07](assets/src/simplefn/Main-Inline.asm)
+@snapend
+
+---
+
+@title[Inline, Inlinable]
+
+
+
+
+
 
 <!-- Библиотеки cereal, binary, protocol-buffers -->
 <!-- lazy Bytestring -->

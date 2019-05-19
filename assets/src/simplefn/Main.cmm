@@ -1,0 +1,29 @@
+[Main.$wask_entry() //  [R2]
+         { info_tbls: [(c500,
+                        label: Main.$wask_info
+                        rep: HeapRep static { Fun {arity: 1 fun_type: ArgSpec 4} }
+                        srt: Nothing)]
+           stack_info: arg_space: 8 updfr_space: Just 8
+         }
+     {offset
+       c500: // global
+           Hp = Hp + 16;
+           if (Hp > HpLim) (likely: False) goto c504; else goto c503;
+       c504: // global
+           HpAlloc = 16;
+           R2 = R2;
+           R1 = Main.$wask_closure;
+           call (stg_gc_fun)(R2, R1) args: 8, res: 0, upd: 8;
+       c503: // global
+           if (R2 != 42) goto c4ZY; else goto c4ZZ;
+       c4ZY: // global
+           I64[Hp - 8] = Main.Done_con_info;
+           I64[Hp] = R2;
+           R1 = Hp - 7;
+           call (P64[Sp])(R1) args: 8, res: 0, upd: 8;
+       c4ZZ: // global
+           Hp = Hp - 16;
+           R1 = Main.Fail_closure+2;
+           call (P64[Sp])(R1) args: 8, res: 0, upd: 8;
+     }
+ }, ... ]

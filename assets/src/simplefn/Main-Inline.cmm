@@ -1,0 +1,14 @@
+[Main.main_entry() //  []
+         { info_tbls: [ ... ]
+           stack_info: arg_space: 8 updfr_space: Just 8
+         }
+     {offset
+       c4Zf: // global
+           R4 = GHC.Types.True_closure+2;
+           R3 = Main.main1_closure;
+           R2 = GHC.IO.Handle.FD.stdout_closure;
+           call GHC.IO.Handle.Text.hPutStr'_info(R4,
+                                                 R3,
+                                                 R2) args: 8, res: 0, upd: 8;
+     }
+ }, .. ]
