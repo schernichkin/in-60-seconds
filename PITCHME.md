@@ -295,7 +295,7 @@ Note:
 @title[Простая функция inline]
 
 
-@code[haskell text-07](assets/src/simplefn/Main-inline.hs)
+@code[haskell text-07](assets/src/simplefn/Main-Inline.hs)
 
 Note: 
 - Убираем директиву {-# NOINLINE #-}
@@ -332,10 +332,77 @@ Note:
 
 @title[Inline, Inlinable]
 
+@snap[north]
+Встраивание (inlining)
+@snapend
+
+```Haskell
+{-# INLINABLE functionName #-}
+```
+<br/>
+```Haskell
+{-# INLINE functionName #-}
+```
+
+Note:
+- Инлайнинг в Хаскеле важен, потому что не просто убрает накладные расходы на вызов функций но позволяет сработать другим оптимизациям.
+- Инлайнинг происходит автоматически внутри модуля, для кроссмодульного инлайнинга необходимо включить определение функции в интерфейс модуля 
+(в этом отличие от JIT языков).
+- В некоторых случаях Haskell может включить определение функции в интерфейс автоматически (всегда, если применён флаг -fexpose-all-unfoldings и функция не 
+отмечена прагмой NOINLINE )
+- При инлайнинге происходит специализация функции в точке вызова.
+- Прагма INLINABLE не влияет на вероятность принятия решения о встраивании 
+функции. 
+- INLINE вынуждает компилятор использовать встраивание более агрессивно, но 
+не гарантирует, что функция будет встроена. 
+- Нет способа управлять инлайнингом в точке вызова, либо гарантированно применять инлайнинг.
+
+---
+
+@title[Inline, Inlinable условия]
+
+@snap[north]
+Условия встраивания
+@snapend
+
+- Применены все аргументы (fully applied)
+- Функция не рекурсивная 
+
+Note: 
+- В случае взаимно рекурсивных функций выбирается loop-breaker, который
+не встраивается, если биндинг, саморекурсивный, loop-breaker-ом может быть
+только он сам.
+
+---
+
+@title[Static argument transformation]
+
+@snap[north span-100]
+Static argument transformation<br/>
+-fstatic-argument
+@snapend
+
+@snap[midpoint span-100]
+@code[Haskell text-07](assets/src/conduit/unfoldC.hs)
+@snapend
+
+@snap[south span-100]
+@code[Haskell text-07](assets/src/conduit/map.hs)
+@snapend
+
+
+Note:
+- Static argument transformation отключена по-умолчанию (но это не точно)
+
+---
+
+```Haskell
+{-# SPECIALIZE #-}
+```
 
 
 
-
+---
 
 <!-- Библиотеки cereal, binary, protocol-buffers -->
 <!-- lazy Bytestring -->
