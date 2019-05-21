@@ -382,14 +382,13 @@ Static argument transformation<br/>
 -fstatic-argument
 @snapend
 
-@snap[midpoint span-100]
-@code[Haskell text-07](assets/src/conduit/unfoldC.hs)
+@snap[midpoint span-80]
+@code[Haskell text-08](assets/src/conduit/unfoldC.hs)
 @snapend
 
-@snap[south span-100]
-@code[Haskell text-07](assets/src/conduit/map.hs)
+@snap[south span-80]
+@code[Haskell text-08](assets/src/conduit/map.hs)
 @snapend
-
 
 Note:
 - Static argument transformation отключена по-умолчанию (но это не точно)
@@ -397,27 +396,44 @@ Note:
 ---
 
 ```Haskell
-{-# SPECIALIZE #-}
+{-# SPECIALISE #-}
 ```
-
-
-
----
-
-<!-- Библиотеки cereal, binary, protocol-buffers -->
-<!-- lazy Bytestring -->
-<!-- Codensity http://comonad.com/reader/2012/unnatural-transformations-and-quantifiers/ -->
+<br/>
+<br/>
+@code[Haskell text-08](assets/src/specialise/sort.hs)
 
 ---
 
-@ul[south-east span-45 text-07](false)
+@code[Haskell text-08](assets/src/specialise/atto.hs)
+
+Note:
+- Почему не inline?
+- Применять прагмы следует если есть бенчмарки.
+- Если функция Inlinable, она может быть специализирована в другом модуле.
+
+---
+
+@code[Haskell text-08](assets/src/specialise/inline.hs)
+
+Note:
+- Пример из документации.
+
+---
+
 - binary
 - cereal
 - protocol-buffers
+<br/>
+<br/>
 - store
 - persist
 - flat
-@ulend
+
+---
+
+
+<!-- lazy Bytestring -->
+<!-- Codensity http://comonad.com/reader/2012/unnatural-transformations-and-quantifiers/ -->
 
 ---
 @title[Особенности дизайна store]
