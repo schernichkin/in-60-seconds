@@ -395,6 +395,8 @@ Note:
 
 ---
 
+@title[Specialise]
+
 ```Haskell
 {-# SPECIALISE #-}
 ```
@@ -403,6 +405,9 @@ Note:
 @code[Haskell text-08](assets/src/specialise/sort.hs)
 
 ---
+
+@title[Specialise в attoparsec]
+
 
 @code[Haskell text-08](assets/src/specialise/atto.hs)
 
@@ -413,12 +418,38 @@ Note:
 
 ---
 
+@title[Specialise Inline]
+
 @code[Haskell text-08](assets/src/specialise/inline.hs)
 
 Note:
 - Пример из документации.
 
 ---
+
+@title[Провал встраивания в Binary]
+
+Binary
+
+@code[Haskell text-08](assets/src/binary/inlineFailure.hs)
+
+---
+
+@title[Провал встраивания в Binary cmm]
+
+@code[c text-08](assets/src/binary/inlineFailure.cmm)
+
+---
+
+@title[Binary readN]
+
+@code[Haskell text-08](assets/src/binary/readN.hs)
+
+---
+
+@title[Lazy vs Strict]
+
+Библиотеки бинарной сериализации
 
 - binary
 - cereal
@@ -431,18 +462,42 @@ Note:
 
 ---
 
+@title[Store bench код]
 
-<!-- lazy Bytestring -->
-<!-- Codensity http://comonad.com/reader/2012/unnatural-transformations-and-quantifiers/ -->
+Store
+
+@code[Haskell text-08](assets/src/store/read12Int64.hs)
 
 ---
+
+@title[Store bench результаты]
+
+Store
+
+@code[txt text-08](assets/src/store/read12Int64.txt)
+
+---
+
+Store: Peek
+
+@code[Haskell text-08](assets/src/store/peek.hs)
+
+---
+
+Store cmm
+
+@code[c text-07](assets/src/store/store.cmm)
+
+---
+
+Store 1M
+
+@code[txt text-07](assets/src/read1MHS.txt)
+
+---
+
 @title[Особенности дизайна store]
 <!-- замер производительности store -->
----
-@title[Дамп кода store]
----
-@title[Встраивание (Inlining)]
-<!-- Упомянуть, при каких условиях может произойти встраивание. -->
 ---
 @title[Дизайн lev-tolstoy]
 <!-- назад к сodensity -->

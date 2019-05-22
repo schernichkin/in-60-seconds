@@ -1,0 +1,21 @@
+ Main.main1_entry() //  [R1] {
+    ...
+           I64[Sp - 24] = c699;
+    ...
+           P64[Sp - 32] = Main.main4_closure+2;
+           Sp = Sp - 32;
+           call Data.Binary.Get.Internal.readN1_info(R6,
+                                                     R5,
+                                                     R4,
+                                                     R3,
+                                                     R2) returns to c699, args: 16, res: 8, upd: 24;
+}
+
+Main.main4_entry() //  [R3, R2] {
+    ...
+           call Data.Binary.Get.Internal.readN1_info(R6,
+                                                     R5,
+                                                     R4,
+                                                     R3,
+                                                     R2) args: 16, res: 0, upd: 8;
+}

@@ -1,0 +1,12 @@
+benchmarking nano/store
+time                 12.04 ms   (10.20 ms .. 14.36 ms)
+                     0.886 R²   (0.799 R² .. 0.965 R²)
+mean                 13.87 ms   (12.94 ms .. 14.58 ms)
+std dev              2.142 ms   (1.575 ms .. 2.741 ms)
+allocated:           0.040 R²   (0.000 R² .. 0.332 R²)
+  iters              40.249     (-47.272 .. 121.955)
+  y                  2578.768   (1470.412 .. 4075.465)
+numGcs:              NaN R²     (NaN R² .. NaN R²)
+  iters              0.000      (0.000 .. 0.000)
+  y                  0.000      (0.000 .. 0.000)
+variance introduced by outliers: 72% (severely inflated)

@@ -1,0 +1,29 @@
+    ...
+       cMd3: // global
+           Hp = Hp + 40;
+           if (Hp > HpLim) (likely: False) goto cMde; else goto cMdd;
+    ...
+       cMdd: // global
+           if (_sLN3::I64 != 0) goto cMd8; else goto cMd9;
+       
+       cMd8: // global
+           _sLN6::I64 = _sLN2::I64 - _sLN1::I64;
+           if (%MO_S_Le_W64(8, _sLN6::I64)) goto cMfG; else goto cMfH;
+       cMfG: // global
+           _sLNb::I64 = _sLN1::I64 + 8;
+           _sLNc::I64 = _sLN2::I64 - _sLNb::I64;
+           if (%MO_S_Le_W64(8, _sLNc::I64)) goto cMfD; else goto cMfE;
+       cMfD: // global
+           _sLNh::I64 = _sLNb::I64 + 8;
+           _sLNi::I64 = _sLN2::I64 - _sLNh::I64;
+           if (%MO_S_Le_W64(8, _sLNi::I64)) goto cMfA; else goto cMfB;
+    ...
+       cMd9: // global
+           I64[Hp - 32] = GHC.Int.I64#_con_info;
+           I64[Hp - 24] = _sLN4::I64;
+           I64[Hp - 16] = Data.Store.Core.PeekResult_con_info;
+           P64[Hp - 8] = Hp - 31;
+           I64[Hp] = _sLN1::I64;
+           R1 = Hp - 15;
+           call (P64[Sp])(R1) args: 8, res: 0, upd: 8;
+    
