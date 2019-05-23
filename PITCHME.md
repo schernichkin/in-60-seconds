@@ -163,8 +163,6 @@ Note:
 
 @title[Базовая оценка производительности - asm dump]
 
--ddump-asm
-
 @code[x86asm text-07](assets/src/hw/read12Int64PlusInt32.asm)
 @[1-5] 
 @[6-8] 
@@ -195,8 +193,6 @@ Note:
 ---
 
 @title[Binary - результаты]
-
-criterion
 
 @code[txt text-06](assets/src/read12Int64HB.sh)
 
@@ -240,11 +236,6 @@ Note:
 
 @title[Простая функция cmm]
 
-@snap[north]
--ddump-cmm
-@snapend
-
-@snap[midpoint]
 @code[c text-07](assets/src/simplefn/Main.cmm)
 @[9-11]
 @[12-16]
@@ -252,7 +243,6 @@ Note:
 @[19-23]
 @[24-27]
 @[1-29]
-@snapend
 
 Note:
 - Проверяем, достаточно ли места в куче, чтобы вернуть объект
@@ -478,110 +468,79 @@ Store
 
 ---
 
+@title[Store](Store дизайн)
+
 Store: Peek
 
 @code[Haskell text-08](assets/src/store/peek.hs)
 
 ---
 
+@title[Store](Store cmm)
+
 Store cmm
 
 @code[c text-07](assets/src/store/store.cmm)
 
+Note:
+- Последовательные ридеры превращены в последовательность команд.
+- Нет выделений памяти внутри цикла.
+- Если проверки диапазона и увеличенине указателя в каждом ридере.
+
 ---
+
+@title[Store](Store 1M bench)
 
 Store 1M
 
 @code[txt text-07](assets/src/read1MHS.txt)
 
----
-
-@title[Особенности дизайна store]
-<!-- замер производительности store -->
----
-@title[Дизайн lev-tolstoy]
-<!-- назад к сodensity -->
-<!-- статическая часть -->
-<!-- indexed monad для вычисления смешений -->
----
-@title[Дамп кода lev-tolstoy]
-<!-- rebindable syntax -->
-<!-- дамп кода статической части -->
----
-@title[Сравнение производительности lev-tolstoy и store]
-
-
-
-
-
----?color=linear-gradient(to right, #c02425, #f0cb35)
-@title[Introduction]
-
-<!--
-Tip! Get started with this template as follows:
-Step 1. Delete the contents of this PITCHME.md file.
-Step 2. Start adding your own custom slide content.
-Step 3. Copy slide markdown snippets from template/md directory as needed.
--->
-
-@snap[west text-25 text-bold text-white]
-GitPitch<br>*The Template*
-@snapend
-
-@snap[south-west byline text-white text-06]
-The Fastest Way From Idea To Presentation.
-@snapend
+Note:
+- Смещения и размеры структур с фиксированным лейаутом можно вычислить статически во время компиляции.
 
 ---
-@title[Slide Markdown]
 
-### Each slide in this presentation is provided as a *template*.
+@title[Store](Singletons)
 
-<br><br>
 
-@snap[south span-100 text-purple text-05]
-Reuse the *markdown snippet* for any slide in this template within your own @css[text-gold text-bold](PITCHME.md) files.
-@snapend
+
+Note:
+- Синглетоны - типы имеющие ровно одно значение
+- Singletons позволяет производить практически любые вычисления над типами и получать значения
+- Нас интересуют натуральные числа (GHC.TypeLists) и операция сложения
 
 ---
-@title[Tip! Fullscreen]
 
-![TIP](template/img/tip.png)
-<br>
-For the best viewing experience, press F for fullscreen.
-@css[template-note](We recommend using the *SPACE* key to navigate between slides.)
+@title[Store](Fixed layout reader)
 
----?include=template/md/split-screen/PITCHME.md
+Ридер для данных с фиксированным расположением 
 
----?include=template/md/sidebar/PITCHME.md
+@code[Haskell text-08](assets/src/lev/ti.hs)
 
----?include=template/md/list-content/PITCHME.md
+---
 
----?include=template/md/boxed-text/PITCHME.md
+@title[Store](Rebindable syntax)
 
----?include=template/md/image/PITCHME.md
+```Haskell
+{-# LANGUAGE RebindableSyntax #-}
+```
 
----?include=template/md/sidebox/PITCHME.md
+@code[Haskell text-08](assets/src/lev/rs.hs)
 
----?include=template/md/code-presenting/PITCHME.md
+---
 
----?include=template/md/header-footer/PITCHME.md
+@title[Store](Примитивные ридеры)
 
----?include=template/md/quotation/PITCHME.md
+Примитивные ридеры
 
----?include=template/md/announcement/PITCHME.md
+@code[Haskell text-08](assets/src/lev/sr.hs)
 
----?include=template/md/about/PITCHME.md
+---
 
----?include=template/md/wrap-up/PITCHME.md
+@title[Store](Dymanic Reader)
 
----?image=template/img/presenter.jpg
-@title[The Template Docs]
+Ридер для данных с не фиксированным расположением 
 
-@snap[west sign-off]
-### Now it's your turn.
-@snapend
+@code[Haskell text-08](assets/src/lev/ dr.hs)
 
-@snap[south docslink text-gold span-100]
-For supporting documentation see the [The Template Docs](https://gitpitch.com/docs/the-template)
-@snapend
+---
