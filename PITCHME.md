@@ -468,7 +468,7 @@ Store
 
 ---
 
-@title[Store](Store дизайн)
+@title[Store дизайн]
 
 Store: Peek
 
@@ -476,7 +476,7 @@ Store: Peek
 
 ---
 
-@title[Store](Store cmm)
+@title[Store cmm]
 
 Store cmm
 
@@ -489,7 +489,7 @@ Note:
 
 ---
 
-@title[Store](Store 1M bench)
+@title[Store 1M bench]
 
 Store 1M
 
@@ -500,7 +500,7 @@ Note:
 
 ---
 
-@title[Store](Singletons)
+@title[Singletons]
 
 
 
@@ -511,7 +511,7 @@ Note:
 
 ---
 
-@title[Store](Fixed layout reader)
+@title[Fixed layout reader]
 
 Ридер для данных с фиксированным расположением 
 
@@ -519,7 +519,7 @@ Note:
 
 ---
 
-@title[Store](Rebindable syntax)
+@title[Rebindable syntax]
 
 ```Haskell
 {-# LANGUAGE RebindableSyntax #-}
@@ -529,7 +529,7 @@ Note:
 
 ---
 
-@title[Store](Примитивные ридеры)
+@title[Примитивные ридеры]
 
 Примитивные ридеры
 
@@ -537,10 +537,8 @@ Note:
 
 ---
 
-@title[Store](Dymanic Reader)
+@title[Dymanic Reader]
 
 Ридер для данных с не фиксированным расположением 
 
 @code[Haskell text-08](assets/src/lev/ dr.hs)
-
----
